@@ -1,8 +1,19 @@
+﻿#include <iostream>
 
+#include "MinimumSpanningTree.h"
+#include "MaxFlow.h"
 
+int main(int argc, char* argv[]) {
 
+    MaxFlow<>::test();
 
-int main() {
-
-	return 0;
+    return 0;
 }
+
+
+
+
+
+
+
+

@@ -5,18 +5,44 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="標頭檔">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="資源檔">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="標頭檔">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="標頭檔\DataStructure">
+      <UniqueIdentifier>{2fe96357-d8b4-4812-9c72-a32846afc6c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Algorithm">
+      <UniqueIdentifier>{9f32d9da-e6f8-4731-b552-0f1b58c085be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>資源檔</Filter>
+      <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="DirectedGraph.h">
+      <Filter>標頭檔\DataStructure</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxFlow.h">
+      <Filter>標頭檔\Algorithm</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DistjointSet.h">
+      <Filter>標頭檔\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="UndirectedGraph.h">
+      <Filter>標頭檔\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="MinimumSpanningTree.h">
+      <Filter>標頭檔\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>標頭檔\DataStructure</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

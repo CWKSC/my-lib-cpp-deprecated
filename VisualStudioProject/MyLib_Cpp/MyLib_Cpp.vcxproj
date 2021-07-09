@@ -88,6 +88,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/Zc:preprocessor /std:c++latest %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessToFile>true</PreprocessToFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,7 +141,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DirectedGraph.h" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MaxFlow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DistjointSet.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="MinimumSpanningTree.h" />
+    <ClInclude Include="UndirectedGraph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
