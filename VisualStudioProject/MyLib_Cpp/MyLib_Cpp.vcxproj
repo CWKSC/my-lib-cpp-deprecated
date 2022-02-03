@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="DistjointSet.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="GraphTraversal.h" />
     <ClInclude Include="MinimumSpanningTree.h" />
     <ClInclude Include="UndirectedGraph.h" />
   </ItemGroup>

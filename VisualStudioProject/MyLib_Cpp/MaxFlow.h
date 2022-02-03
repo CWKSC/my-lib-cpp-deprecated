@@ -15,18 +15,21 @@
 template<typename EdgeValue = int, typename Node = int>
 struct MaxFlow
 {
-    using Nodes = DirectedGraph<>::Nodes;
-    using ToEdgesMap = DirectedGraph<>::ToEdgesMap;
-    using ToEdges = DirectedGraph<>::ToEdges;
-    using ToEdge = DirectedGraph<>::ToEdge;
-    using Edge = DirectedGraph<>::Edge;
+    using _DirectedGraph   = DirectedGraph<EdgeValue, Node>;
+    using _UndirectedGraph = UndirectedGraph<EdgeValue, Node>;
 
-    using Path = std::pair<int, int>;
+    using Nodes      = typename _DirectedGraph::Nodes;
+    using ToEdgesMap = typename _DirectedGraph::ToEdgesMap;
+    using ToEdges    = typename _DirectedGraph::ToEdges;
+    using ToEdge     = typename _DirectedGraph::ToEdge;
+    using Edge       = typename _DirectedGraph::Edge;
+
+    using Path  = std::pair<int, int>;
     using Paths = std::list<Path>;
 
     static bool findAugmentingPath(Graph<>* graph, int s, int t, Paths& paths) {
         Nodes nodes;
-        if (!graph->BFS(s, t, nodes)) return false;
+        if (!graph->GetNodesStartToEndByBFS(s, t, nodes)) return false;
 
         for (size_t i = 0; i < nodes.size() - 1; i++) {
             paths.push_back({ nodes[i], nodes[i + 1] });
@@ -34,9 +37,9 @@ struct MaxFlow
         return true;
     }
 
-    static DirectedGraph<> getMaxFlowNetwork(DirectedGraph<> graph, int s, int t, int& maxFlow) {
+    static _DirectedGraph getMaxFlowNetwork(_DirectedGraph graph, int s, int t, int& maxFlow) {
 
-        DirectedGraph<> residualNetwork(graph.edges);
+        _DirectedGraph residualNetwork(graph.edges);
         maxFlow = 0;
 
         while (true) {
@@ -53,7 +56,7 @@ struct MaxFlow
             maxFlow += min;
         }
 
-        DirectedGraph<> maxFlowNetwork(graph.edges);
+        _DirectedGraph maxFlowNetwork(graph.edges);
         for (const Edge& edge : residualNetwork.edges) {
             for (const ToEdge& toEdge : edge.second) {
                 maxFlowNetwork.edges[edge.first][toEdge.first] -= toEdge.second;
@@ -64,9 +67,9 @@ struct MaxFlow
     }
 
 
-    static DirectedGraph<> getMaxFlowNetwork(UndirectedGraph<> graph, int s, int t, int& maxFlow) {
+    static _DirectedGraph getMaxFlowNetwork(_UndirectedGraph graph, int s, int t, int& maxFlow) {
 
-        DirectedGraph<> residualNetwork(graph);
+        _DirectedGraph residualNetwork(graph);
         maxFlow = 0;
 
         while (true) {
@@ -84,7 +87,7 @@ struct MaxFlow
             maxFlow += min;
         }
 
-        DirectedGraph<> maxFlowNetwork(graph.edges);
+        _DirectedGraph maxFlowNetwork(graph.edges);
         for (const Edge& edge : residualNetwork.edges) {
             for (const ToEdge& toEdge : edge.second) {
                 maxFlowNetwork.edges[edge.first][toEdge.first] -= toEdge.second;
@@ -96,7 +99,7 @@ struct MaxFlow
 
 
     static void test() {
-        DirectedGraph<> graph;
+        _DirectedGraph graph;
         graph.addEdge(0, 1, 16);
         graph.addEdge(0, 2, 13);
         graph.addEdge(1, 3, 12);
@@ -111,15 +114,15 @@ struct MaxFlow
         graph.printAllEdge();
         graph.printAllNeighborsNode();
 
-        int maxFlow;
-        DirectedGraph<> maxFlowNetwork = getMaxFlowNetwork(graph, 0, 5, maxFlow);
+        int maxFlow = 0;
+        _DirectedGraph maxFlowNetwork = getMaxFlowNetwork(graph, 0, 5, maxFlow);
 
         std::cout << "maxFlow: " << maxFlow << '\n';
         maxFlowNetwork.printAllEdge();
     }
 
     static void test2() {
-        DirectedGraph<> graph;
+        _DirectedGraph graph;
         graph.addEdge(0, 2, 10);
         graph.addEdge(0, 3, 10);
         graph.addEdge(2, 3, 2);
@@ -133,8 +136,8 @@ struct MaxFlow
         graph.printAllEdge();
         graph.printAllNeighborsNode();
 
-        int maxFlow;
-        DirectedGraph<> maxFlowNetwork = getMaxFlowNetwork(graph, 0, 6, maxFlow);
+        int maxFlow = 0;
+        _DirectedGraph maxFlowNetwork = getMaxFlowNetwork(graph, 0, 6, maxFlow);
 
         std::cout << "maxFlow: " << maxFlow << '\n';
         maxFlowNetwork.printAllEdge();
@@ -148,7 +151,7 @@ struct MaxFlow
             int n;
             int s, t, c;
             int nodeA, nodeB, value;
-            UndirectedGraph<> graph;
+            _UndirectedGraph graph;
 
             std::cin >> n;
             if (n == 0) break;
@@ -158,8 +161,8 @@ struct MaxFlow
                 graph.addEdge(nodeA, nodeB, value);
             }
 
-            int maxFlow;
-            DirectedGraph<> maxFlowNetwork = getMaxFlowNetwork(graph, s, t, maxFlow);
+            int maxFlow = 0;
+            _DirectedGraph maxFlowNetwork = getMaxFlowNetwork(graph, s, t, maxFlow);
 
             std::cout << "Network " << index << '\n';
             index++;
@@ -173,7 +176,7 @@ struct MaxFlow
             int nk, np;
             int numberOfCategory;
             int category;
-            DirectedGraph<> graph;
+            _DirectedGraph graph;
 
             std::cin >> nk >> np;
             if (nk == 0 && np == 0) break;
@@ -195,13 +198,9 @@ struct MaxFlow
                 graph.addEdge(startNode, nk + i, 1);
             }
 
-            int maxFlow;
-            DirectedGraph<> maxFlowNetwork = getMaxFlowNetwork(graph, startNode, 0, maxFlow);
-            // std::cout << "The max is " << maxFlow << ".\n\n";
-            // maxFlowNetwork.printAllEdgeOrdered(np);
-            // std::cout << "maxflow: " << maxFlow <<  "  total: " << sumQuestion << '\n';
+            int maxFlow = 0;
+            _DirectedGraph maxFlowNetwork = getMaxFlowNetwork(graph, startNode, 0, maxFlow);
             std::cout << (maxFlow == sumQuestion) << "\n";
-            // std::cout << (maxFlow == sumQuestion) << '\n';
         }
 
     }

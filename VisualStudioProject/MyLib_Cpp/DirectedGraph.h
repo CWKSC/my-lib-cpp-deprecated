@@ -95,6 +95,52 @@ struct DirectedGraph : public Graph<EdgeValue, Node>
         graph.printAllNeighborsNode();
     }
 
+
+    static void test2() {
+        DirectedGraph<> graph;
+        graph.addEdge(0, 4, 1);
+        graph.addEdge(0, 7, 1);
+
+        graph.addEdge(1, 0, 1);
+        graph.addEdge(1, 2, 1);
+        graph.addEdge(1, 3, 1);
+
+        graph.addEdge(3, 2, 1);
+        graph.addEdge(3, 1, 1);
+        graph.addEdge(3, 7, 1);
+
+        graph.addEdge(4, 6, 1);
+        graph.addEdge(4, 7, 1);
+        
+        graph.addEdge(5, 4, 1);
+
+        graph.addEdge(6, 5, 1);
+
+        graph.addEdge(7, 5, 1);
+
+        graph.printAllEdge();
+        graph.printAllNeighborsNode();
+
+        std::cout << "BFS: ";
+        Nodes BFSnodes = graph.BFS(0);
+        Graph<>::printNodes(BFSnodes);
+        std::cout << "\n\n";
+
+        std::cout << "BFS Layer: ";
+        graph.BFS_Layer(0, [](Nodes nodes, int layer) {
+            std::cout << "Layer " << layer << ": ";
+            Graph<>::printNodes(nodes);
+            std::cout << '\n';
+        });
+        std::cout << '\n';
+
+        std::cout << "DFS: ";
+        Nodes DFSnodes = graph.DFS(0);
+        Graph<>::printNodes(DFSnodes);
+        std::cout << '\n';
+
+    }
+
 };
 
 
