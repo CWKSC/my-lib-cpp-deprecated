@@ -44,5 +44,8 @@
     <ClInclude Include="Graph.h">
       <Filter>標頭檔\DataStructure</Filter>
     </ClInclude>
+    <ClInclude Include="findLongestMultiplicationSebsequence.h">
+      <Filter>標頭檔\Algorithm</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
